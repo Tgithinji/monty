@@ -26,7 +26,7 @@ int main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	/* get each line in the file */
-	while (getline(&line, &n, fd) != -1)
+	while (_getline(&line, &n, fd) != -1)
 	{
 		printf("%s", line);
 	}

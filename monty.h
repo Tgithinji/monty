@@ -40,4 +40,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/* function prototypes */
+ssize_t _getline(char **line, size_t *n, FILE *fd);
+
 #endif /* MONTY_H */
