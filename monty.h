@@ -43,7 +43,11 @@ typedef struct instruction_s
 
 /* function prototypes */
 ssize_t _getline(char **line, size_t *n, FILE *fd);
-void initialize_args(char *line, char ***arguments);
-void free_arguments(char **arguments);
+void initialize_args(char *line, char ***argumentsi, int *count);
+void free_arguments(char ***arguments);
+int execute_instruction(char **arguments, unsigned int line_number);
+int _opcode(instruction_t inst[], char **arguments, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pall(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */

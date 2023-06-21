@@ -5,14 +5,14 @@ ssize_t _getl(char **line, size_t *n, FILE *fd);
  * _getline - reads a single line in a stream
  * @line: where to store the read line
  * @n: size of the buffer
- * @stream: the stream the line is to be read from
+ * @fd: the stream the line is to be read from
  *
  * Return: number of lines read
  */
 ssize_t _getline(char **line, size_t *n, FILE *fd)
 {
 	if (*n == 0)
-		*n = 100;
+		*n = 20;
 	if (*line == NULL)
 	{
 		*line = malloc(*n);
@@ -30,6 +30,7 @@ ssize_t _getline(char **line, size_t *n, FILE *fd)
  * _getl - loops to the end of the line
  * @line: where the line will be stored
  * @n: points to the size of line
+ * @fd: file stream
  *
  * Return: number of chars read
  */

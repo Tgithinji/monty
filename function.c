@@ -5,7 +5,7 @@
  * @value: value to push in the stack
  * Return: 0 on success
  */
-void push(stack_t **stack, int value)
+void push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
 
@@ -14,7 +14,7 @@ void push(stack_t **stack, int value)
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = value;
+	new_node->n = line_number;
 	new_node->prev = NULL;
 	new_node->next = *stack;
 
@@ -29,13 +29,13 @@ void push(stack_t **stack, int value)
  * @stack: Pointer to the top of the stack
  * Return: 0 on success
  */
-void pall(stack_t **stack)
+void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *current = *stack;
 
 	while (current != NULL)
 	{
-		printf("%d\n", current->n);
+		printf("%d%d\n", current->n, line_number);
 		current = current->next;
 	}
 }

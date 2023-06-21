@@ -12,8 +12,9 @@ int main(int argc, char **argv)
 	FILE *fd;
 	size_t n = 0;
 	char *line = NULL;
-	int line_number = 1;
-	stack_t *stack = malloc(sizeof(stack_t));
+	unsigned int line_number = 0;
+	int count = 0;
+	char **arguments = NULL;
 	/* check if number of arguments passed is correct */
 	if (argc != 2)
 	{
@@ -30,27 +31,30 @@ int main(int argc, char **argv)
 	/* get each line in the file */
 	while (_getline(&line, &n, fd) != -1)
 	{
-		line[strcspn(line, "\n")] = '\0';  /* Remove trailing newline character */
-		
-		if (!execute_instruction(line, &stack, line_number))
-		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, line);
-			free(line);
-			fclose(fd);
-			exit(EXIT_FAILURE);
-		}
 		line_number++;
-
-		if (stack == NULL)
+		/* Remove trailing newline character */
+		line[strcspn(line, "\n")] = '\0';
+		/* seperate the contnts of line at the given delimeters */
+		initialize_args(line, &arguments, &count);
+		if (count == 0)
 		{
-			fprintf(stderr, "Error: malloc failed\n");
-			free(line);
-			fclose(fd);
-			exit(EXIT_FAILURE);
+			continue;
+		}
+		else
+		{
+			if (!execute_instruction(arguments, line_number))
+			{
+				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, line);
+				free(line);
+				free_arguments(&arguments);
+				fclose(fd);
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
 	/* close file */
 	free(line);
+	free_arguments(&arguments);
 	fclose(fd);
 	return (0);
 }
