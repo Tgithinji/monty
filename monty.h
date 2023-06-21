@@ -6,6 +6,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
 
 /**
  * struct stack_s - doubly linked list implementation of
@@ -42,5 +43,7 @@ typedef struct instruction_s
 
 /* function prototypes */
 ssize_t _getline(char **line, size_t *n, FILE *fd);
+void initialize_args(char *line, char ***arguments);
+void free_arguments(char **arguments);
 
 #endif /* MONTY_H */
