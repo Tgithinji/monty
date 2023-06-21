@@ -8,6 +8,9 @@
 #include <fcntl.h>
 #include <string.h>
 
+/* global variables */
+extern char **arguments;
+
 /**
  * struct stack_s - doubly linked list implementation of
  * a stack or a queue
@@ -43,10 +46,10 @@ typedef struct instruction_s
 
 /* function prototypes */
 ssize_t _getline(char **line, size_t *n, FILE *fd);
-void initialize_args(char *line, char ***argumentsi, int *count);
-void free_arguments(char ***arguments);
-int execute_instruction(char **arguments, unsigned int line_number);
-int _opcode(instruction_t inst[], char **arguments, unsigned int line_number);
+void initialize_args(char *line, int *count);
+void free_arguments();
+int execute_instruction(unsigned int line_number);
+int _opcode(instruction_t inst[], unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 

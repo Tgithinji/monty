@@ -7,7 +7,7 @@
  * @count: the number of arguments
  * @arguments: the array of pointers
  */
-void initialize_args(char *line, char ***arguments, int *count)
+void initialize_args(char *line, int *count)
 {
 	int i = 0;
 	char *delims = " \n\t", *token;
@@ -19,8 +19,8 @@ void initialize_args(char *line, char ***arguments, int *count)
 		*count += 1;
 		token = strtok(NULL, delims);
 	}
-	*arguments = malloc(sizeof(char *) * (*count + 1));
-	if (*arguments == NULL)
+	arguments = malloc(sizeof(char *) * (*count + 1));
+	if (arguments == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
@@ -29,33 +29,33 @@ void initialize_args(char *line, char ***arguments, int *count)
 	token = strtok(line, delims);
 	while (token != NULL)
 	{
-		(*arguments)[i] = malloc(strlen(token) + 1);
-		if ((*arguments)[i] == NULL)
+		arguments[i] = malloc(strlen(token) + 1);
+		if (arguments[i] == NULL)
 		{
 			fprintf(stderr, "Error: malloc failes");
-			free_arguments(arguments);
+			free_arguments();
 			exit(EXIT_SUCCESS);
 		}
-		strcpy((*arguments)[i], token);
+		strcpy(arguments[i], token);
 		i++;
 		token = strtok(NULL, delims);
 	}
-	(*arguments)[i] = NULL;
+	arguments[i] = NULL;
 }
 
 /**
  * free_arguments - frees memory from arguments array
  * @arguments: array of pointers
  */
-void free_arguments(char ***arguments)
+void free_arguments()
 {
 	int i;
 
-	for (i = 0; (*arguments)[i] != NULL; i++)
+	for (i = 0; arguments[i] != NULL; i++)
 	{
-		free(*arguments[i]);
+		free(arguments[i]);
 	}
-	free(*arguments);
+	free(arguments);
 }
 
 /**

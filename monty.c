@@ -1,5 +1,8 @@
 #include "monty.h"
 #include <stdio.h>
+
+char **arguments = NULL;
+
 /**
  * main - entry point
  * @argc: argument count
@@ -14,7 +17,6 @@ int main(int argc, char **argv)
 	char *line = NULL;
 	unsigned int line_number = 0;
 	int count = 0;
-	char **arguments = NULL;
 	/* check if number of arguments passed is correct */
 	if (argc != 2)
 	{
@@ -35,18 +37,18 @@ int main(int argc, char **argv)
 		/* Remove trailing newline character */
 		line[strcspn(line, "\n")] = '\0';
 		/* seperate the contnts of line at the given delimeters */
-		initialize_args(line, &arguments, &count);
+		initialize_args(line, &count);
 		if (count == 0)
 		{
 			continue;
 		}
 		else
 		{
-			if (!execute_instruction(arguments, line_number))
+			if (!execute_instruction(line_number))
 			{
 				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, line);
 				free(line);
-				free_arguments(&arguments);
+				free_arguments();
 				fclose(fd);
 				exit(EXIT_FAILURE);
 			}
@@ -54,7 +56,7 @@ int main(int argc, char **argv)
 	}
 	/* close file */
 	free(line);
-	free_arguments(&arguments);
+	free_arguments();
 	fclose(fd);
 	return (0);
 }
