@@ -12,6 +12,8 @@ int main(int argc, char **argv)
 	FILE *fd;
 	size_t n = 0;
 	char *line = NULL;
+	int line_number = 1;
+	stack_t *stack = malloc(sizeof(stack_t));
 	/* check if number of arguments passed is correct */
 	if (argc != 2)
 	{
@@ -28,7 +30,24 @@ int main(int argc, char **argv)
 	/* get each line in the file */
 	while (_getline(&line, &n, fd) != -1)
 	{
-		printf("%s", line);
+		line[strcspn(line, "\n")] = '\0';  /* Remove trailing newline character */
+		
+		if (!execute_instruction(line, &stack, line_number))
+		{
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, line);
+			free(line);
+			fclose(fd);
+			exit(EXIT_FAILURE);
+		}
+		line_number++;
+
+		if (stack == NULL)
+		{
+			fprintf(stderr, "Error: malloc failed\n");
+			free(line);
+			fclose(fd);
+			exit(EXIT_FAILURE);
+		}
 	}
 	/* close file */
 	free(line);
