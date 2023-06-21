@@ -11,9 +11,9 @@ int main(int argc, char **argv)
 {
 	(void) argv;
 	/* check if number of arguments passed is correct */
-	if (argc != 2)
+	if (argc < 2)
 	{
-		dprintf(2, "USAGE: monty file\n");
+		fprintf(2, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	return (0);
