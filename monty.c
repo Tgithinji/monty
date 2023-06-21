@@ -1,5 +1,5 @@
 #include "monty.h"
-
+#include <stdio.h>
 /**
  * main - entry point
  * @argc: argument count
@@ -9,16 +9,29 @@
  */
 int main(int argc, char **argv)
 {
-	(void) argv;
-	int fd;
+	FILE *fd;
+	size_t n = 0;
+	char *line = NULL;
 	/* check if number of arguments passed is correct */
-	if (argc < 2)
+	if (argc != 2)
 	{
-		fprintf(2, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	/* open the provided file */
-	fd = open(filename, 0_RDONLY);
-	if (fd == -1)
+	fd = fopen(argv[1], "r");
+	if (fd == NULL)
+	{
+		fprintf(stderr, "ERROR: Can't open fole %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+	/* get each line in the file */
+	while (getline(&line, &n, fd) != -1)
+	{
+		printf("%s", line);
+	}
+	/* close file */
+	free(line);
+	fclose(fd);
 	return (0);
 }
