@@ -25,7 +25,7 @@ void sub(stack_t **stack, unsigned int line_number)
 	pop(stack, line_number);
 }
 /**
- * div - function that divides the second top element by the top element
+ * monty_div - function that divides the second top element by the top element
  * @stack: Pointer to the top of the stack
  * @line_number: Line number where the nop opcode is
  */
@@ -60,7 +60,8 @@ void mul(stack_t **stack, unsigned int line_number)
 	pop(stack, line_number);
 }
 /**
- * mod - function that Computes the remainder of the division of the second top element
+ * mod - function that Computes the remainder of the div
+ * ision of the second top element
  * @stack: Pointer to the top of the stack
  * @line_number: Line number where the nop opcode is
  */
