@@ -89,9 +89,16 @@ int execute_instruction(unsigned int line_number)
 		{"pop", &pop},
 		{"swap", &swap},
 		{"add", &add},
+		{"nop", &nop},
+		{"sub", &sub},
+		{"div", &monty_div},
+		{"mul", &mul},
+		{"mod", &mod},
 		{NULL, NULL}
 	};
-	return (_opcode(instructions, line_number));
+	if (arguments[0][0] != '#')
+		return (_opcode(instructions, line_number));
+	return (1);
 }
 
 /**
