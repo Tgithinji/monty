@@ -1,4 +1,7 @@
 #include "monty.h"
+int count;
+char **arguments;
+stack_t *temp;
 /**
  * push - Pushes an element to the stack
  * @stack: Pointer to the top of the stack
@@ -101,7 +104,7 @@ void swap(stack_t **stack, unsigned int line_number)
 {
 	int temp;
 
-	if (temp == NULL || temp->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
@@ -117,7 +120,7 @@ void swap(stack_t **stack, unsigned int line_number)
  */
 void add(stack_t **stack, unsigned int line_number)
 {
-	if (temp == NULL || temp->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
