@@ -8,10 +8,6 @@
 #include <fcntl.h>
 #include <string.h>
 
-/* global variables */
-extern char **arguments;
-extern int count;
-
 /**
  * struct stack_s - doubly linked list implementation of
  * a stack or a queue
@@ -45,6 +41,11 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/* global variables */
+extern char **arguments;
+extern int count;
+extern stack_t *temp;
+
 /* function prototypes */
 ssize_t _getline(char **line, size_t *n, FILE *fd);
 void initialize_args(char *line);
@@ -53,5 +54,6 @@ int execute_instruction(unsigned int line_number);
 int _opcode(instruction_t instructions[], unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+int is_int(char *argument);
 
 #endif /* MONTY_H */

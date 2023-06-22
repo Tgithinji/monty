@@ -8,8 +8,8 @@
  */
 void initialize_args(char *line)
 {
-	int i = 0;
-	char *delims = " \n\t", *token;
+	int i = 0, j;
+	char *delims = " \n", *token;
 	count = 0;
 
 	/* get the number of arguments in the line buffer */
@@ -33,7 +33,11 @@ void initialize_args(char *line)
 		if (arguments[i] == NULL)
 		{
 			fprintf(stderr, "Error: malloc failes");
-			free_arguments();
+			for(j = 0; j < 1; j++)
+			{
+				free(arguments[i]);
+			}
+			free(arguments);
 			exit(EXIT_SUCCESS);
 		}
 		strcpy(arguments[i], token);
@@ -101,4 +105,28 @@ int _opcode(instruction_t instructions[], unsigned int line_number)
 		}
 	}
 	return (0);
+}
+
+/**
+ * is_int: checks if a string is a number
+ * @argument: the string
+ * Return: 1 if true, 0 if false
+ */
+int is_int(char *argument)
+{
+	int i;
+
+	for (i = 0; argument[i] != '\0'; i++)
+	{
+		/* check if number is negative */
+		if (argument[i] == 0 && i == 0)
+		{
+			continue;
+		}
+		if (argument[i] < '0' || argument[i] > '9')
+		{
+			return (0);
+		}
+	}
+	return (1);
 }
