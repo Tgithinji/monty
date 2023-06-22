@@ -89,6 +89,10 @@ int execute_instruction(unsigned int line_number)
 		{"pop", &pop},
 		{"swap", &swap},
 		{"add", &add},
+		{"nop", &nop},
+		{"sub", &sub},
+		{"div", &monty_div},
+		{"mul", &mul},
 		{NULL, NULL}
 	};
 	return (_opcode(instructions, line_number));
