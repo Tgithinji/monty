@@ -5,21 +5,21 @@
  * and argument
  * @line: the buffer containing the content to be seperated
  * @count: the number of arguments
- * @arguments: the array of pointers
  */
-void initialize_args(char *line, int *count)
+void initialize_args(char *line)
 {
 	int i = 0;
 	char *delims = " \n\t", *token;
+	count = 0;
 
 	/* get the number of arguments in the line buffer */
 	token = strtok(line, delims);
 	while (token != NULL)
 	{
-		*count += 1;
+		count++;
 		token = strtok(NULL, delims);
 	}
-	arguments = malloc(sizeof(char *) * (*count + 1));
+	arguments = malloc(sizeof(char *) * (count + 1));
 	if (arguments == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed");
@@ -51,48 +51,52 @@ void free_arguments()
 {
 	int i;
 
+	if (arguments == NULL)
+	{
+		return;
+	}
+
 	for (i = 0; arguments[i] != NULL; i++)
 	{
 		free(arguments[i]);
 	}
 	free(arguments);
+	arguments = NULL;
 }
 
 /**
  * execute_instruction - initializes an structure array
- * @arguments: array of pointers
  * @line_number: line number
  *
  * Return: 1 for success and 0 for failure
  */
-int execute_instruction(char **arguments, unsigned int line_number)
+int execute_instruction(unsigned int line_number)
 {
-	instruction_t inst[] = {
+	instruction_t instructions[] = {
 		{"push", &push},
 		{"pall", &pall},
 		{NULL, NULL}
 	};
-	return (_opcode(inst, arguments, line_number));
+	return (_opcode(instructions, line_number));
 }
 
 /**
  * _opcode - matches opcode to its respective function
  * @inst: an structure array
- * @arguments: an array of pointers
  * @line_number: the number of the line
  *
  * Return: 1 for success and 0 for failure
  */
-int _opcode(instruction_t inst[], char **arguments, unsigned int line_number)
+int _opcode(instruction_t instructions[], unsigned int line_number)
 {
 	int i;
 	stack_t *stack = NULL;
 
-	for (i = 0; inst[i].opcode != NULL; i++)
+	for (i = 0; instructions[i].opcode != NULL; i++)
 	{
-		if (strcmp(inst[i].opcode, arguments[0]) == 0)
+		if (strcmp(instructions[i].opcode, arguments[0]) == 0)
 		{
-			inst[i].f(&stack, line_number);
+			instructions[i].f(&stack, line_number);
 			return (1);
 		}
 	}

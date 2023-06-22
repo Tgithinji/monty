@@ -10,6 +10,7 @@
 
 /* global variables */
 extern char **arguments;
+extern int count;
 
 /**
  * struct stack_s - doubly linked list implementation of
@@ -46,10 +47,10 @@ typedef struct instruction_s
 
 /* function prototypes */
 ssize_t _getline(char **line, size_t *n, FILE *fd);
-void initialize_args(char *line, int *count);
+void initialize_args(char *line);
 void free_arguments();
 int execute_instruction(unsigned int line_number);
-int _opcode(instruction_t inst[], unsigned int line_number);
+int _opcode(instruction_t instructions[], unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 

@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 char **arguments = NULL;
+int count = 0;
 
 /**
  * main - entry point
@@ -16,7 +17,6 @@ int main(int argc, char **argv)
 	size_t n = 0;
 	char *line = NULL;
 	unsigned int line_number = 0;
-	int count = 0;
 	/* check if number of arguments passed is correct */
 	if (argc != 2)
 	{
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 		/* Remove trailing newline character */
 		line[strcspn(line, "\n")] = '\0';
 		/* seperate the contnts of line at the given delimeters */
-		initialize_args(line, &count);
+		initialize_args(line);
 		if (count == 0)
 		{
 			continue;
@@ -53,10 +53,9 @@ int main(int argc, char **argv)
 				exit(EXIT_FAILURE);
 			}
 		}
+		free_arguments();
 	}
-	/* close file */
 	free(line);
-	free_arguments();
 	fclose(fd);
 	return (0);
 }
