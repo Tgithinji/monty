@@ -40,10 +40,28 @@ void pall(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
 	*stack = temp;
+	if (*stack == NULL)
+		return;
 
 	while (*stack != NULL)
 	{
 		printf("%d\n", (*stack)->n);
 		*stack = (*stack)->next;
 	}
+}
+
+/**
+ * pint - Prints the value at the top of the stack
+ * @stack: Pointer to an empty stack
+ * @line_number: number of line
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+	if (temp == NULL)
+	{
+		fprintf(stderr, "L%d: can't pint, stck empty\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	(*stack) = temp;
+	fprintf(stdout, "%d\n", (*stack)->n);
 }
