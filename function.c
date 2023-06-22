@@ -49,7 +49,7 @@ void pall(stack_t **stack, unsigned int line_number)
 	current = temp;
 	while (current != NULL)
 	{
-		printf("%d\n", current->n);
+		fprintf(stdout, "%d\n", current->n);
 		current = current->next;
 	}
 }
@@ -68,4 +68,27 @@ void pint(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	fprintf(stdout, "%d\n", temp->n);
+}
+
+/**
+ * pop - deletes the top most node
+ * @stack: pointer to a stack 
+ * @line_number: number of line
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current;
+
+	(void) stack;
+	if (temp == NULL)
+	{
+		fprintf(stdout, "L%d: can't pop an empty stack", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	current = temp;
+	temp = temp->next;
+	if (temp != NULL)
+		temp->prev = NULL;
+	free(current);
 }
