@@ -1,15 +1,9 @@
 #include "monty.h"
 #include <stdio.h>
-
-stack_t *temp = NULL;
-char **arguments = NULL;
-int count = 0;
-
 /**
  * main - entry point
  * @argc: argument count
  * @argv: pointer array containg arguments passed
- *
  * Return: 0 (Success)
  */
 int main(int argc, char **argv)
@@ -24,25 +18,19 @@ int main(int argc, char **argv)
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	/* open the provided file */
-	fd = fopen(argv[1], "r");
+	fd = fopen(argv[1], "r"); /* open the provided file */
 	if (fd == NULL)
 	{
 		fprintf(stderr, "ERROR: Can't open fole %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	/* get each line in the file */
-	while (_getline(&line, &n, fd) != -1)
+	while (_getline(&line, &n, fd) != -1)/* get each line in the file */
 	{
 		line_number++;
-		/* Remove trailing newline character */
-		line[strcspn(line, "\n")] = '\0';
-		/* seperate the contnts of line at the given delimeters */
-		initialize_args(line);
+		line[strcspn(line, "\n")] = '\0';/* Remove trailing newline character */
+		initialize_args(line);/* seperate the contnts of line */
 		if (count == 0)
-		{
 			continue;
-		}
 		else
 		{
 			if (!execute_instruction(line_number))

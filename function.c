@@ -72,7 +72,7 @@ void pint(stack_t **stack, unsigned int line_number)
 
 /**
  * pop - deletes the top most node
- * @stack: pointer to a stack 
+ * @stack: pointer to a stack
  * @line_number: number of line
  */
 void pop(stack_t **stack, unsigned int line_number)
@@ -91,4 +91,37 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (temp != NULL)
 		temp->prev = NULL;
 	free(current);
+}
+/**
+ * swap - Swaps the top two elements of the stack
+ * @stack: Pointer to the top of the stack
+ * @line_number: Line number where the swap opcode is
+ */
+void swap(stack_t **stack, unsigned int line_number)
+{
+	int temp;
+
+	if (temp == NULL || temp->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp = (*stack)->n;
+	(*stack)->n = (*stack)->next->n;
+	(*stack)->next->n = temp;
+}
+/**
+ * add - Adds the top two elements of the stack
+ * @stack: Pointer to the top of the stack
+ * @line_number: Line number where the add opcode is
+ */
+void add(stack_t **stack, unsigned int line_number)
+{
+	if (temp == NULL || temp->next == NULL)
+	{
+		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+	temp->next->n += temp->n;
+	pop(stack, line_number);
 }

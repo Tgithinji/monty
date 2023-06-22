@@ -1,25 +1,22 @@
 #include "monty.h"
-
 /**
- * initialize_args - populates an array with the op_code
- * and argument
+ * initialize_args - populates an array with the op_code and argument
  * @line: the buffer containing the content to be seperated
- * @count: the number of arguments
  */
 void initialize_args(char *line)
 {
 	int i = 0, j;
 	char *delims = " \n", *token, *line_copy;
-	count = 0;
 
+	count = 0;
 	line_copy = malloc(strlen(line) + 1);
+
 	if (line_copy == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_SUCCESS);
 	}
-	/* get the number of arguments in the line buffer */
-	strcpy(line_copy, line);
+	strcpy(line_copy, line); /* get the number of arg */
 	token = strtok(line_copy, delims);
 	while (token != NULL)
 	{
@@ -33,8 +30,7 @@ void initialize_args(char *line)
 		fprintf(stderr, "Error: malloc failed");
 		exit(EXIT_FAILURE);
 	}
-	/* copy arguments to argument array */
-	strcpy(line_copy, line);
+	strcpy(line_copy, line); /* copy arguments to argument array */
 	token = strtok(line_copy, delims);
 	while (token != NULL)
 	{
@@ -42,7 +38,7 @@ void initialize_args(char *line)
 		if (arguments[i] == NULL)
 		{
 			fprintf(stderr, "Error: malloc failes");
-			for(j = 0; j < 1; j++)
+			for (j = 0; j < 1; j++)
 			{
 				free(arguments[i]);
 			}
@@ -60,9 +56,8 @@ void initialize_args(char *line)
 
 /**
  * free_arguments - frees memory from arguments array
- * @arguments: array of pointers
  */
-void free_arguments()
+void free_arguments(void)
 {
 	int i;
 
@@ -92,6 +87,8 @@ int execute_instruction(unsigned int line_number)
 		{"pall", &pall},
 		{"pint", &pint},
 		{"pop", &pop},
+		{"swap", &swap},
+		{"add", &add},
 		{NULL, NULL}
 	};
 	return (_opcode(instructions, line_number));
@@ -99,9 +96,8 @@ int execute_instruction(unsigned int line_number)
 
 /**
  * _opcode - matches opcode to its respective function
- * @inst: an structure array
+ * @instructions: users instruction
  * @line_number: the number of the line
- *
  * Return: 1 for success and 0 for failure
  */
 int _opcode(instruction_t instructions[], unsigned int line_number)
@@ -121,7 +117,7 @@ int _opcode(instruction_t instructions[], unsigned int line_number)
 }
 
 /**
- * is_int: checks if a string is a number
+ * is_int - checks if a string is a number
  * @argument: the string
  * Return: 1 if true, 0 if false
  */
