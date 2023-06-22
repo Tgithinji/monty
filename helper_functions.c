@@ -9,16 +9,24 @@
 void initialize_args(char *line)
 {
 	int i = 0, j;
-	char *delims = " \n", *token;
+	char *delims = " \n", *token, *line_copy;
 	count = 0;
 
+	line_copy = malloc(strlen(line) + 1);
+	if (line_copy == NULL)
+	{
+		fprintf(stderr, "Error: malloc failed");
+		exit(EXIT_SUCCESS);
+	}
 	/* get the number of arguments in the line buffer */
-	token = strtok(line, delims);
+	strcpy(line_copy, line);
+	token = strtok(line_copy, delims);
 	while (token != NULL)
 	{
 		count++;
 		token = strtok(NULL, delims);
 	}
+	free_arguments();
 	arguments = malloc(sizeof(char *) * (count + 1));
 	if (arguments == NULL)
 	{
@@ -26,7 +34,8 @@ void initialize_args(char *line)
 		exit(EXIT_FAILURE);
 	}
 	/* copy arguments to argument array */
-	token = strtok(line, delims);
+	strcpy(line_copy, line);
+	token = strtok(line_copy, delims);
 	while (token != NULL)
 	{
 		arguments[i] = malloc(strlen(token) + 1);
@@ -38,6 +47,7 @@ void initialize_args(char *line)
 				free(arguments[i]);
 			}
 			free(arguments);
+			free(line_copy);
 			exit(EXIT_SUCCESS);
 		}
 		strcpy(arguments[i], token);
@@ -45,6 +55,7 @@ void initialize_args(char *line)
 		token = strtok(NULL, delims);
 	}
 	arguments[i] = NULL;
+	free(line_copy);
 }
 
 /**

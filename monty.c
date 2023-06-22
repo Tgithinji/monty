@@ -35,14 +35,10 @@ int main(int argc, char **argv)
 	while (_getline(&line, &n, fd) != -1)
 	{
 		line_number++;
-		printf("line_number:%d, line read:%s\n", line_number, line);
 		/* Remove trailing newline character */
 		line[strcspn(line, "\n")] = '\0';
 		/* seperate the contnts of line at the given delimeters */
 		initialize_args(line);
-		printf("arguments[0]:%s\n",arguments[0]);
-		printf("arguments[1]:%s\n",arguments[2]);
-		printf("counr: %d\n", count);
 		if (count == 0)
 		{
 			continue;
