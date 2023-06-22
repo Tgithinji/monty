@@ -45,11 +45,12 @@ typedef struct instruction_s
 extern char **arguments;
 extern int count;
 extern stack_t *temp;
+extern int stack_length;
 
 /* function prototypes */
 ssize_t _getline(char **line, size_t *n, FILE *fd);
 void initialize_args(char *line);
-void free_arguments();
+void free_arguments(void);
 int execute_instruction(unsigned int line_number);
 int _opcode(instruction_t instructions[], unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);

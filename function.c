@@ -32,6 +32,7 @@ void push(stack_t **stack, unsigned int line_number)
 		temp->prev = *stack;
 	}
 	temp = *stack;
+	stack_length += 1;
 }
 /**
  * pall - Prints all the values on the stack
@@ -94,6 +95,7 @@ void pop(stack_t **stack, unsigned int line_number)
 	if (temp != NULL)
 		temp->prev = NULL;
 	free(current);
+	stack_length -= 1;
 }
 /**
  * swap - Swaps the top two elements of the stack
@@ -102,16 +104,22 @@ void pop(stack_t **stack, unsigned int line_number)
  */
 void swap(stack_t **stack, unsigned int line_number)
 {
-	int temp;
+	stack_t *temp2;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	(void) stack;
+	if (stack_length < 2 || temp == NULL)
 	{
 		fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	temp = (*stack)->n;
-	(*stack)->n = (*stack)->next->n;
-	(*stack)->next->n = temp;
+	temp2 = temp;
+	temp = temp->next;
+	if (temp != NULL)
+		temp->prev = NULL;
+	temp2->prev = temp;
+	temp2->next = temp->next;
+	temp->next = temp2;
+	temp->next->prev = temp2;
 }
 /**
  * add - Adds the top two elements of the stack

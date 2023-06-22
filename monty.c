@@ -1,5 +1,8 @@
 #include "monty.h"
 #include <stdio.h>
+
+int stack_length = 0;
+
 /**
  * main - entry point
  * @argc: argument count
