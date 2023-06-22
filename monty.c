@@ -46,6 +46,22 @@ int main(int argc, char **argv)
 	}
 	free_arguments();
 	free(line);
+	free_stack();
 	fclose(fd);
 	return (0);
+}
+
+/**
+ * free_stack - free stack memory
+ */
+void free_stack(void)
+{
+	if (temp == NULL)
+		return;
+	while (temp != NULL)
+	{
+		stack_t *temp2 = temp;
+		temp = temp->next;
+		free(temp2);
+	}
 }
