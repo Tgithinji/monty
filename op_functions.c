@@ -99,7 +99,7 @@ void rotr(stack_t **stack, unsigned int line_number)
 	(void) stack;
 	(void) line_number;
 
-	if (temp == NULL)
+	if (temp == NULL || stack_length < 2)
 		return;
 	temp1 = temp;
 	while (temp->next != NULL)
