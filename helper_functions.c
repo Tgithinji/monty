@@ -135,7 +135,7 @@ int is_int(char *argument)
 	for (i = 0; argument[i] != '\0'; i++)
 	{
 		/* check if number is negative */
-		if (argument[i] == 0 && i == 0)
+		if (argument[i] == '-' && i == 0)
 		{
 			continue;
 		}
