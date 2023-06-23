@@ -60,3 +60,27 @@ void pstr(stack_t **stack, unsigned int line_number)
 	}
 	printf("\n");
 }
+
+/**
+ * rotl - rotates the stack to the top
+ * @stack: points to a stack
+ * @line_number: line number of the opcode
+ */
+void rotl(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp1, *temp2;
+
+	(void) stack;
+	(void) line_number;
+
+	temp1 = temp;
+	temp2 = temp;
+	temp = temp->next;
+	if (temp != NULL)
+		temp->prev = NULL;
+	while (temp2->next)
+		temp2 = temp2->next;
+	temp1->prev = temp2;
+	temp2->next = temp1;
+	temp1->next = NULL;
+}

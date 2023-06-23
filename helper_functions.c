@@ -96,6 +96,7 @@ int execute_instruction(unsigned int line_number)
 		{"mod", &mod},
 		{"pchar", &pchar},
 		{"pstr", &pstr},
+		{"rotl", &rotl},
 		{NULL, NULL}
 	};
 	if (arguments[0][0] != '#')
