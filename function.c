@@ -122,18 +122,3 @@ void swap(stack_t **stack, unsigned int line_number)
 	temp->next = temp2;
 	temp->next->prev = temp2;
 }
-/**
- * add - Adds the top two elements of the stack
- * @stack: Pointer to the top of the stack
- * @line_number: Line number where the add opcode is
- */
-void add(stack_t **stack, unsigned int line_number)
-{
-	if (stack_length < 2)
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	temp->next->n += temp->n;
-	pop(stack, line_number);
-}

@@ -38,6 +38,7 @@ int main(int argc, char **argv)
 			{
 				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, line);
 				free(line);
+				free_stack();
 				free_arguments();
 				fclose(fd);
 				exit(EXIT_FAILURE);
@@ -61,6 +62,7 @@ void free_stack(void)
 	while (temp != NULL)
 	{
 		stack_t *temp2 = temp;
+
 		temp = temp->next;
 		free(temp2);
 	}
