@@ -37,3 +37,26 @@ void pchar(stack_t **stack, unsigned int line_number)
 	}
 	fprintf(stdout, "%c\n", (char)temp->n);
 }
+
+/**
+ * pstr - prints the string at the top of a stack
+ * @stack: a pointer to a stack
+ * @line_number: line_number of the opcode
+ */
+void pstr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *current;
+
+	(void) stack;
+	(void) line_number;
+
+	current = temp;
+	while (current != NULL)
+	{
+		if (current->n <= 0 || current->n > 127)
+			break;
+		fprintf(stdout, "%c", (char)current->n);
+		current = current->next;
+	}
+	printf("\n");
+}
