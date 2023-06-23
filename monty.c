@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	fd = fopen(argv[1], "r"); /* open the provided file */
 	if (fd == NULL)
 	{
-		fprintf(stderr, "ERROR: Can't open fole %s\n", argv[1]);
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	while (_getline(&line, &n, fd) != -1)/* get each line in the file */
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 		{
 			if (!execute_instruction(line_number))
 			{
-				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, line);
+				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, arguments[0]);
 				free(line);
 				free_stack();
 				free_arguments();
