@@ -86,3 +86,26 @@ void rotl(stack_t **stack, unsigned int line_number)
 	temp2->next = temp1;
 	temp1->next = NULL;
 }
+
+/**
+ * rotr - rotates stack to the bottom
+ * @stack: pointer to a stack
+ * @line_number: number of the line read
+ */
+void rotr(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp1;
+
+	(void) stack;
+	(void) line_number;
+
+	if (temp == NULL)
+		return;
+	temp1 = temp;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->prev->next = NULL;
+	temp->prev = NULL;
+	temp->next = temp1;
+	temp1->prev = temp;
+}
