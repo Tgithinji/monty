@@ -94,6 +94,7 @@ int execute_instruction(unsigned int line_number)
 		{"div", &monty_div},
 		{"mul", &mul},
 		{"mod", &mod},
+		{"pchar", &pchar},
 		{NULL, NULL}
 	};
 	if (arguments[0][0] != '#')
