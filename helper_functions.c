@@ -98,6 +98,8 @@ int execute_instruction(unsigned int line_number)
 		{"pstr", &pstr},
 		{"rotl", &rotl},
 		{"rotr", &rotr},
+		{"stack", &stack},
+		{"queue", &queue},
 		{NULL, NULL}
 	};
 	if (arguments[0][0] != '#')

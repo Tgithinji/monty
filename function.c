@@ -11,13 +11,14 @@ int stack_length = 0;
  */
 void push(stack_t **stack, unsigned int line_number)
 {
+	stack_t *temp2;
+
 	if (count <= 1 || !(is_int(arguments[1])))
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 	*stack = malloc(sizeof(stack_t));
-
 	if (*stack == NULL)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
@@ -26,13 +27,27 @@ void push(stack_t **stack, unsigned int line_number)
 	(*stack)->n = atoi(arguments[1]);
 	(*stack)->prev = NULL;
 	(*stack)->next = NULL;
-
 	if (temp != NULL)
 	{
-		(*stack)->next = temp;
-		temp->prev = *stack;
+		if (queue_tru == 0)
+		{
+			(*stack)->next = temp;
+			temp->prev = *stack;
+			temp = *stack;
+		}
+		else
+		{
+			temp2 = temp;
+			while (temp2->next != NULL)
+				temp2 = temp2->next;
+			temp2->next = *stack;
+			(*stack)->prev = temp2;
+		}
 	}
-	temp = *stack;
+	else
+	{
+		temp = *stack;
+	}
 	stack_length += 1;
 }
 /**

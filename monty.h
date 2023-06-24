@@ -46,6 +46,7 @@ extern char **arguments;
 extern int count;
 extern stack_t *temp;
 extern int stack_length;
+extern int queue_tru;
 
 /* function prototypes */
 ssize_t _getline(char **line, size_t *n, FILE *fd);
@@ -70,5 +71,7 @@ void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
+void queue(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
 
 #endif /* MONTY_H */
